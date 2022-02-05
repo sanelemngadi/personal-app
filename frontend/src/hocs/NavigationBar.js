@@ -23,7 +23,7 @@ const NavigationBar = () => {
                         <Nav.Link href="/todos/">Todos</Nav.Link>
                         <Nav.Link href="#poll">Fun Polls</Nav.Link>
                         <Nav.Link href="#poll">About</Nav.Link>
-                        <Nav.Link href="#poll">Log In</Nav.Link>
+                        <Nav.Link href="/login/">Log In</Nav.Link>
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

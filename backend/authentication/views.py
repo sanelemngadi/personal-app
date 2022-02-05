@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework import permissions
 
 
 class RegistrationView(CreateAPIView):
@@ -45,3 +46,16 @@ class LoginVeiw(APIView):
     "email": "sanele@gmail.com",
     "password": "sanele"
 }
+
+
+class LoggedInUserView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        try:
+            user = User.objects.get(username=request.user.username)
+        except User.DoesNotExist:
+            return Response({"error": "user doesnot exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)

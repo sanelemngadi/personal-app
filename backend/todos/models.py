@@ -4,7 +4,8 @@ from authentication.models import User
 
 
 class Todo(models.Model):
-    task = models.CharField(max_length=350, unique=True)
+    task = models.CharField(max_length=250, unique=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     completed = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
 
