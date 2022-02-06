@@ -1,0 +1,65 @@
+@media screen and (max-width:767) {
+    .sign-form{
+    margin: 1.5rem auto;
+    width: 5rem !important;
+    border-radius: 2rem;
+    padding: 2rem;
+    background-color: orange;
+}
+}
+/* @media screen and (max-width:991) and (min-width:768) {
+      .sign-form{
+    margin: 1.5rem auto;
+    width: 100%;
+    border-radius: 2rem;
+    padding: 2rem;
+    background-color: blue;
+}
+}
+@media screen and (max-width:1199) and (min-width:992) {
+      .sign-form{
+    margin: 1.5rem auto;
+    width: 30rem;
+    border-radius: 2rem;
+    padding: 2rem;
+    background-color: beige;
+}
+}
+@media screen and (min-width:1200) {
+      .sign-form{
+    margin: 1.5rem auto;
+    width: 30rem;
+    border-radius: 2rem;
+    padding: 2rem;
+    background-color: red;
+}
+} */
+
+.sign-form{
+    margin: 1.5rem auto;
+    width: 30rem;
+    border: 1px solid silver;
+    border-radius: 2rem;
+    padding: 2rem;
+    box-shadow: 2px 2px 2px silver;
+    background-color: white;
+}
+.sign-form:hover{
+    box-shadow: 6px 6px 20px 5px silver;
+}
+
+.loginSignUpSeparator {
+    border-top: 1px solid #cbd2d6;
+    position: relative;
+    margin: 25px 0 10px;
+    text-align: center;
+}
+
+.loginSignUpSeparator .textInSeparator {
+    background-color: #fff;
+    padding: 0 .5em;
+    position: relative;
+    color: #6c7378;
+    top: -.7em;
+}
+

@@ -3,45 +3,42 @@ import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import React, { useEffect, useState } from 'react';
 import SignForm from './SignForm';
-import axiosInst from './Axios';
 import axios from 'axios';
 
-const Login = () => {
+const Registration = () => {
     const [, dispatch] = useGlobalState();
-    const [siteState, setSiteState] = useState({
+
+    const initialState = Object.freeze({
         isLoading: false,
         hasError: null
-    })
+    });
+    const [siteState, setSiteState] = useState(initialState);
     const [formData, handleChange] = useHandleChange({
         email: "",
         password: ""
-    })
+    });
 
-    const status = "login";
+    const status = "registration";
     const navigate = useNavigate();
-    const url = useBaseEndPoint("users/login/");
+    const url = useBaseEndPoint("users/");
+
+    // const dispatch = useDispatch();
+    // const { setCurrentPage, fetchUser } = bindActionCreators(actionCreators, dispatch)
 
     useEffect(() => {
-        dispatch.setCurrentPage("login")
-    }, []);
+        dispatch.setCurrentPage("register");
+    }, [dispatch]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setSiteState({ ...siteState, isLoading: true });
-        dispatch.fetchUser([]);
-        console.log(localStorage.getItem('access_token'));
 
         axios.post(url, formData)
             .then(res => {
                 console.log(res);
                 setSiteState({ ...siteState, isLoading: false });
 
-                localStorage.setItem('access_token', res.data.access_token);
-                localStorage.setItem('refresh_token', res.data.refresh_token);
-                axiosInst.defaults.headers['Authorization'] = "JWT " +
-                    localStorage.setItem('access_token', res.data.access_token)
-                dispatch.fetchUser(res.data.user);
-                console.log(localStorage.getItem('access_token'));
+                dispatch.setUser(res.data.user);
                 navigate("/");
             })
             .catch(err => {
@@ -52,16 +49,14 @@ const Login = () => {
     }
     return (
         <Container>
-            <SignForm
-                status={status}
+            <SignForm status={status}
                 formData={formData}
                 siteState={siteState}
                 setSiteState={setSiteState}
                 handleChange={handleChange}
-                handleSubmit={handleSubmit}
-            />
+                handleSubmit={handleSubmit} />
         </Container>
     );
 };
 
-export default Login;
+export default Registration;

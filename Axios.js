@@ -1,23 +1,21 @@
 import axios from "axios";
 
-const baseUrl = process.env.REACT_APP_BASE_URL;
-
-const axiosInst = axios.create({
+const baseUrl = `${process.env.REACT_APP_BASE}`;
+export const axiosInst = axios.create({
     baseURL: baseUrl,
     timeout: 5000,
     headers: {
-        Authorization: localStorage.getItem('access_token')
-            ? 'JWT ' + localStorage.getItem('access_token')
+        Authorization: localStorage.getItem('access_token') ? 'JWT ' + localStorage.getItem('access_token')
             : null,
         'Content-Type': 'application/json',
-        Accept: 'application/json'
-    },
-});
-
+        Accept: 'application/json',
+    }
+})
 
 axiosInst.interceptors.response.use(
     (response) => {
         return response;
+
     },
     async function (error) {
         const originalRequest = error.config;
@@ -31,10 +29,10 @@ axiosInst.interceptors.response.use(
         }
         if (error.response.status === 401 && originalRequest.url === baseUrl + 'token/refresh/'
         ) {
-            window.location.href = 'users/login/';
+            window.location.href = '/signinup/';
+            console.log("Msanest");
             return Promise.reject(error);
         }
-
         if (
             error.response.data.code === 'token_not_valid' && error.response.status === 401 && error.response.statusText === 'Unauthorized'
         ) {
@@ -45,14 +43,13 @@ axiosInst.interceptors.response.use(
 
                 //exp date in token in seconds, while now() returns mill
                 const now = Math.ceil(Date.now() / 1000);
-                console.log(tokenParts.exp);
 
                 if (tokenParts.exp > now) {
                     return axiosInst
                         .post('/token/refresh/', { refresh: refreshToken })
                         .then((response) => {
                             localStorage.setItem('access_token', response.data.access);
-                            localStorage.setItem('refresh_token', response.data.refresh);
+                            // console.log("access fetched");
 
                             axiosInst.defaults.headers['Authorization'] = 'JWT ' + response.data.access;
                             originalRequest.headers['Authorization'] = 'JWT ' + response.data.access;
@@ -64,12 +61,12 @@ axiosInst.interceptors.response.use(
                         })
                 }
                 else {
-                    console.log('Refresh token is expired', tokenParts.exp, now);
-                    window.location.href = 'users/login/';
+                    // console.log('Refresh token is expired', tokenParts.exp, now);
+                    window.location.href = '/signinup/';
                 }
             } else {
                 console.log('Refresh token not available.');
-                window.location.href = 'users/login/';
+                window.location.href = '/signinup/';
             }
         }
         // specific error handling done elsewhere
@@ -77,4 +74,3 @@ axiosInst.interceptors.response.use(
     }
 )
 
-export default axiosInst

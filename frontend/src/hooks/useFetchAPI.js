@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axiosInst from '../components/authentication/Axios';
 
-const useFetchAPI = (endpoint) => {
+const useFetchAPI = (endpoint, initValues = []) => {
     const [values, setValues] = useState({
         isLoading: false,
         err: null,
-        resp: []
+        resp: initValues
     });
 
     useEffect(() => {
         setValues({ ...values, isLoading: true });
 
-        const fetchValues = () => {
-            axiosInst.get(endpoint)
+        const fetchValues = async () => {
+            await axiosInst.get(endpoint)
                 .then(response => {
                     console.log(response);
                     setValues({
@@ -26,7 +26,7 @@ const useFetchAPI = (endpoint) => {
                     setValues({
                         isLoading: false,
                         err: erra,
-                        resp: []
+                        resp: {}
                     })
                 })
         };

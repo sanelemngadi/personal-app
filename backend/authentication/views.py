@@ -1,5 +1,6 @@
+import email
 from django.contrib.auth.hashers import check_password
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, UpdateAPIView
 from authentication.serializers import UserSerializer
 from authentication.models import User
 from rest_framework.views import APIView
@@ -9,8 +10,24 @@ from rest_framework import status
 from rest_framework import permissions
 
 
-class RegistrationView(CreateAPIView):
-    serializer_class = UserSerializer
+class RegistrationView(APIView):
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+
+        if serializer.is_valid():
+            new_user = serializer.save()
+            refresh_token = RefreshToken.for_user(new_user)
+            data = {
+                "user": serializer.data,
+                "access_token": str(refresh_token.access_token),
+                "refresh_token": str(refresh_token)
+            }
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class RegistrationView(CreateAPIView):
+#     serializer_class = UserSerializer
 
 
 class LoginVeiw(APIView):
@@ -49,13 +66,21 @@ class LoginVeiw(APIView):
 
 
 class LoggedInUserView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         try:
             user = User.objects.get(username=request.user.username)
         except User.DoesNotExist:
-            return Response({"error": "user doesnot exist"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CompleteRegistrationView(UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def perform_update(self, serializer):
+        serializer.save(email=self.request.user.email)
