@@ -1,0 +1,103 @@
+.task-body{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid silver;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-top: 1px solid silver;
+    padding: .2rem;
+    width: 100%;
+    box-shadow: 0px 1px 2px transparent;
+    cursor: pointer;
+}
+.task-body:hover{
+    border: 1px solid silver;
+    box-shadow: 0px 1px 2px silver;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+}
+.checkbox-icos{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    padding: .2rem;
+}
+/* .checkbox-icos::before{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0rem;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #000000;
+    opacity: .1;
+    cursor: pointer;
+} */
+/* .checkbox-icos:hover::before{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -.2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: #000000;
+    opacity: .3;
+    cursor: pointer;
+    transition: all .3s .1s ease-in-out;
+} */
+.task-complete .form-check-input{
+    padding: 0;
+    margin: 0;
+    border: 2px solid black;
+}
+
+.form-check-input:checked {
+    background-color: black !important;
+    border-color: black !important;
+}
+.task-complete .form-check-input {
+    background-color: #E6E6FF;
+    border-color: gray;
+}
+.task-complete .form-check-input {
+    width: 1.3rem;
+    height: 1.3rem;
+    cursor: pointer;
+}
+
+.author{
+    font-weight: 500;
+}
+
+.more-options{
+    display: flex;
+    justify-content: space-around;
+}
+.more-options .edit-pen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.more-options .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: .875rem;
+    border-radius: 50%;
+}
+.table>:not(caption)>*>* {
+    padding: 0;
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+}

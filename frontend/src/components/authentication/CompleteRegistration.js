@@ -1,8 +1,8 @@
-import React from 'react';
+import { useBaseEndPoint, useHandleChange } from '../../hooks';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useBaseEndPoint, useHandleChange } from '../../hooks';
 import axiosInst from './Axios';
+import React from 'react';
 
 const CompleteRegistration = ({ id }) => {
     const [formData, handleChange] = useHandleChange({

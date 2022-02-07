@@ -1,28 +1,65 @@
+import { FaEllipsisH, FaEllipsisV, FaPen, FaRegTrashAlt } from 'react-icons/fa';
+import { useBaseEndPoint, useGlobalState, usePageState } from '../../hooks';
+import { Container, Breadcrumb, Form, Image } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
-import { Container, Breadcrumb, Card, Form, FormCheck } from 'react-bootstrap';
-import AddTodoForm from './AddTodoForm';
-import { useBaseEndPoint, useGlobalState } from '../../hooks';
+import todoCliff from '../../media/todoCliff.svg';
 import axiosInst from '../authentication/Axios';
+import { Link } from 'react-router-dom';
+import AddTodoForm from './AddTodoForm';
+import "./css/Todo.css";
 
 const Todo = () => {
+    const [todoEditMode, setTodoEditMode] = useState(false);
+    const [pageState, setPageState] = usePageState();
+    const [state, dispatch] = useGlobalState();
     const [todos, setTodos] = useState([]);
     const url = useBaseEndPoint("todos/");
-    const [, dispatch] = useGlobalState();
+    console.log("this is todo state: ", state);
+    const { todo } = state;
 
     useEffect(() => {
+        setPageState({ ...pageState, isLoading: true });
         dispatch.setCurrentPage("todos");
         const getTodos = async () => {
             await axiosInst.get(url)
                 .then(resp => {
+                    setPageState({
+                        hasError: null,
+                        isLoading: false
+                    })
                     console.log(resp.data);
                     setTodos(resp.data);
                 })
                 .catch(err => {
                     console.log(err);
+                    setPageState({
+                        hasError: err,
+                        isLoading: false
+                    })
                 })
         }
         getTodos();
-    }, [url]);
+    }, [url, todo]);
+
+    const removeTodo = (todo, removed) => {
+        setPageState({ ...pageState, isLoading: true });
+        axiosInst.delete(todo)
+            .then(res => {
+                console.log(res);
+                dispatch.deleteTodo(removed)
+                setPageState({
+                    hasError: null,
+                    isLoading: false
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                setPageState({
+                    hasError: err,
+                    isLoading: false
+                })
+            });
+    }
 
     return (
         <Container style={{ paddingTop: "5rem" }}>
@@ -33,36 +70,76 @@ const Todo = () => {
                     <Breadcrumb.Item>Completed Todos</Breadcrumb.Item>
                 </Breadcrumb>
                 <br />
-                <AddTodoForm />
-                <br />
-                <Card style={{ backgroundColor: "#76C2AC" }} className='p-1 p-sm-2'>
-                    {todos.length > 0 && (
-                        <div style={{ backgroundColor: "#E6E6FF" }} className='p-1 p-sm-2' >
-                            {todos.map((todo) => {
+
+                <div className="row">
+                    <div className="col-md-6">
+                        <Image src={todoCliff} />
+
+
+                    </div>
+                    <div className="col-md-6">
+                        <br />
+                        <AddTodoForm pageState={pageState} todoEditMode={todoEditMode} />
+                        <br />
+                        {todos.length > 0 && (
+
+                            todos.map((todo) => {
+                                if (todo.task.length > 85) {
+                                    return 0
+                                }
                                 return (
-                                    <table className='w-100' key={"todo-" + todo.url}>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <Form>
-                                                        <Form.Group>
-                                                            <FormCheck />
-                                                        </Form.Group>
-                                                    </Form>
-                                                </td>
-                                                <td rowSpan={2}>{todo.task}</td>
-                                                <td>{todo.created}</td>
-                                                <td className='border btn btn-danger btn-sm'>X</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div
+                                        className="task-body gap-2 gap-sm-4 gap-md-5"
+                                        key={"default-" + todo.url}>
+                                        <div className="init-icons">
+                                            <Form className="checkbox-icos">
+                                                <FaEllipsisV />
+                                                <Form.Check
+                                                    className='task-complete'
+                                                    checked={todo.completed} />
+                                            </Form>
+                                        </div>
+                                        <Link to="#">
+                                            {
+                                                todo.task.length > 30 ?
+                                                    todo.task.substring(0, 30) + "..." :
+                                                    todo.task
+                                            }
+                                        </Link>
+                                        <div className="more-options">
+                                            <span className='d-sm-none'>
+                                                <button className="btn btn-outline-warning btn-sm">
+                                                    <FaEllipsisH />
+                                                </button>
+                                            </span>
+
+                                            <span className="edit-pen d-none d-sm-inline mx-1">
+                                                <button
+                                                    className="btn btn-outline-info btn-sm"
+                                                    onClick={() => setTodoEditMode(true)}
+                                                >
+                                                    <FaPen />
+                                                </button>
+                                            </span>
+                                            <span className="edit-pen d-none d-sm-inline mx-1">
+                                                <button
+                                                    className="btn btn-outline-danger btn-sm"
+                                                    onClick={() => removeTodo(todo.url, todo)}
+                                                >
+                                                    <FaRegTrashAlt />
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
                                 )
-                            })}
-                        </div>
-                    )}
-                </Card>
-            </div>
-        </Container>
+                            }
+                            ))
+                        }
+
+                    </div>
+                </div>
+            </div >
+        </Container >
     );
 };
 

@@ -1,18 +1,17 @@
 import { useBaseEndPoint, useGlobalState, useHandleChange } from '../../hooks';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
-import React, { useEffect, useState } from 'react';
 import SignForm from './SignForm';
 import axios from 'axios';
 
 const Registration = () => {
     const [, dispatch] = useGlobalState();
-
+    const [siteState, setSiteState] = useState(initialState);
     const initialState = Object.freeze({
         isLoading: false,
         hasError: null
     });
-    const [siteState, setSiteState] = useState(initialState);
     const [formData, handleChange] = useHandleChange({
         email: "",
         password: ""
@@ -21,9 +20,6 @@ const Registration = () => {
     const status = "registration";
     const navigate = useNavigate();
     const url = useBaseEndPoint("users/");
-
-    // const dispatch = useDispatch();
-    // const { setCurrentPage, fetchUser } = bindActionCreators(actionCreators, dispatch)
 
     useEffect(() => {
         dispatch.setCurrentPage("register");

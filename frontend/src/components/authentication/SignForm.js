@@ -1,7 +1,7 @@
 import { Button, Container, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import './css/SignForm.css';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const SignForm = (props) => {
     const status = props.status;
@@ -50,7 +50,9 @@ const SignForm = (props) => {
                     <span class="textInSeparator">or</span>
                 </div>
                 <span>
-                    {status === "login" ? "If You don't have and account?" : "Do you have and account?"}
+                    {status === "login" ?
+                        "If You don't have and account?" :
+                        "Do you have and account?"}
                 </span>
                 &nbsp;&nbsp;
                 <Link

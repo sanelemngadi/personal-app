@@ -5,7 +5,13 @@ const todoReducer = (state = [], action) => {
         case "FETCH_TODOS":
             return action.payload;
 
-        case "UPDATE_TODOS":
+        case "UPDATE_TODO":
+            return action.payload;
+
+        case "ADD_TODO":
+            return action.payload;
+
+        case "DELETE_TODO":
             return action.payload;
 
         default:

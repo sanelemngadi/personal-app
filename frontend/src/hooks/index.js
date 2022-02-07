@@ -5,5 +5,6 @@ import useHandleChange from "./useHandleChange";
 import useFetchUser from "./useGlobalState";
 import useBaseEndPoint from "./useBaseEndPoint";
 import useGlobalState from "./useGlobalState";
+import usePageState from "./usePageState";
 
-export { useAPISendForm, useHandleAuthForm, useFetchAPI, useHandleChange, useFetchUser, useBaseEndPoint, useGlobalState }
+export { useAPISendForm, useHandleAuthForm, useFetchAPI, useHandleChange, useFetchUser, useBaseEndPoint, useGlobalState, usePageState }

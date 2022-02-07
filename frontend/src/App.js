@@ -1,25 +1,22 @@
+import CompleteRegistration from './components/authentication/CompleteRegistration';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Registration from './components/authentication/Registration';
 import React, { useEffect, useRef, useState } from 'react'
+import Logout from './components/authentication/Logout';
+import Login from './components/authentication/Login';
+import NavigationBar from './hocs/NavigationBar';
 import Todo from "./components/todos/Todo";
 import Home from "./components/home/Home";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavigationBar from './hocs/NavigationBar';
-import Login from './components/authentication/Login';
 import { useFetchAPI } from './hooks';
-import Logout from './components/authentication/Logout';
-import Registration from './components/authentication/Registration';
-import CompleteRegistration from './components/authentication/CompleteRegistration';
 
 function App() {
-  const [user, setUser] = useState({});
   const loggedInUser = useFetchAPI("users/user/", {});
+  const [user, setUser] = useState({});
   console.log(loggedInUser.resp);
 
   useEffect(() => {
     setUser(loggedInUser.resp);
   }, [loggedInUser]);
-
-  const countRenders = useRef(0);
-  console.log(user);
 
   const isAuthenticated = () => {
     if (Object.keys(user).length > 0 || Object.keys(loggedInUser.resp).length > 0) {
@@ -31,7 +28,6 @@ function App() {
     }
   }
   const isAuth = isAuthenticated();
-  console.log("App renders: ", countRenders.current++);
   return (
     <Router>
       <NavigationBar isAuth={isAuth} />

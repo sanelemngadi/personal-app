@@ -1,15 +1,12 @@
-import React, { useEffect } from 'react';
-import axiosInst from './Axios';
 import { useNavigate } from 'react-router-dom';
 import { useFetchUser } from '../../hooks';
+import React, { useEffect } from 'react';
+import axiosInst from './Axios';
 
 const Logout = ({ setUser }) => {
     const [, dispatch] = useFetchUser();
 
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
-
-    // const { fetchUser } = bindActionCreators(actionCreators, dispatch)
     useEffect(() => {
         const loggOutUser = () => {
             axiosInst.defaults.headers = null;

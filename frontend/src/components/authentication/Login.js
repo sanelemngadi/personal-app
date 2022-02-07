@@ -1,7 +1,7 @@
 import { useBaseEndPoint, useGlobalState, useHandleChange } from '../../hooks';
+import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
-import React, { useEffect, useState } from 'react';
 import SignForm from './SignForm';
 import axiosInst from './Axios';
 import axios from 'axios';
@@ -17,12 +17,12 @@ const Login = () => {
         password: ""
     })
 
-    const status = "login";
-    const navigate = useNavigate();
     const url = useBaseEndPoint("users/login/");
+    const navigate = useNavigate();
+    const status = "login";
 
     useEffect(() => {
-        dispatch.setCurrentPage("login")
+        dispatch.setCurrentPage("login");
     }, []);
 
     const handleSubmit = (e) => {

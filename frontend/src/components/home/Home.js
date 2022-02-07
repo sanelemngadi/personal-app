@@ -7,13 +7,6 @@ const Home = ({ setUser }) => {
     const [show, setShow] = useState(false);
     const [, dispatch] = useGlobalState();
     const url = process.env.REACT_APP_BASE_URL;
-    console.log("base url: ", url);
-
-    // const state = useSelector(state => state);
-    // console.log(state);
-
-    // const dispatch = useDispatch();
-    // const { setCurrentPage, fetchUser } = bindActionCreators(actionCreators, dispatch)
 
     const user = useFetchAPI('users/user/', {});
     console.log(user.resp);
@@ -38,7 +31,13 @@ const Home = ({ setUser }) => {
                 <Breadcrumb.Item>Completed Todos</Breadcrumb.Item>
             </Breadcrumb>
             <br />
-            {user.resp.username === "" && <RegModal id={user.resp.id} email={user.resp.email} show={show} setShow={setShow} />}
+            {user.resp.username === "" &&
+                <RegModal
+                    id={user.resp.id}
+                    email={user.resp.email}
+                    show={show}
+                    setShow={setShow}
+                />}
 
         </Container>
     );
