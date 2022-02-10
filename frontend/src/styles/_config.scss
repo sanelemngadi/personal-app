@@ -1,0 +1,30 @@
+$primary-color:#444444;
+$secondary-color: #171717;
+$tertiary-color: #DA0037;
+
+//Media queries
+$tablet: 767px;
+$laptop: 992px;
+$deskop: 1200px;
+
+@mixin mq($width) {
+    @media only screen and (min-width: $width){
+        @content;
+    }
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+
+}
+
+@function set-text-color($color){
+    @if(lightness($color)>70%){
+        @return $secondary-color;
+    }@else{
+        @return #EDEDED;
+    }
+}

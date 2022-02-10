@@ -1,0 +1,91 @@
+
+@include mq($tablet){
+    main{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+        margin-top: 2rem;
+    }
+
+    .row-board{
+        background-color: black;
+    }
+
+    section.section-gratitude {
+        padding: 1.5rem 0;
+    }
+
+    section.row-board{
+    display: flex;
+    // gap: 1.5rem;
+    margin: .5rem;
+
+    .categories{
+        flex: 1;
+        width: 100%;
+        display: block;
+        // justify-content: space-between;
+        // background-color: black;
+        margin: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #707070;
+        border-radius: .5rem;
+        box-shadow: 2px 2px 2px #707070;
+
+        .category-header{
+            color: set-text-color($primary-color);
+            font-size: 1.3rem;
+        }
+
+        ul{
+            display: block;
+            height: auto;
+        }
+        li{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+            padding: .5em 0;
+        }
+        a{
+            // text-decoration: none;
+            color: set-text-color($primary-color);
+        }
+        li:nth-child(3){
+            // text-decoration: none;
+            display: inline-block;
+            font-size: .8rem;
+            width: 50%;
+            text-align: right;
+        }
+    
+    }
+    aside.aside{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        flex: 1;
+
+        // div{
+        //     flex: 1;
+        // }
+    }
+}
+.aside-moogee{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.list-check{
+    display: block;
+    width: 32px;
+    margin: .2rem .5rem;
+}
+
+.aside-cliff{
+    padding: 0 .5rem;
+    img{
+        width: 100%;
+    }
+}
+}

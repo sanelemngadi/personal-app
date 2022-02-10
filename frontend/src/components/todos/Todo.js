@@ -73,7 +73,7 @@ const Todo = () => {
 
                 <div className="row">
                     <div className="col-md-6">
-                        <Image src={todoCliff} />
+                        <Image className="todo-cliff" src={todoCliff} />
 
 
                     </div>

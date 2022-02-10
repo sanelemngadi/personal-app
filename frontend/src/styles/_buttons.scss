@@ -1,0 +1,41 @@
+
+
+@mixin  header-buttons {
+    border: 1px solid $tertiary-color;
+    border-radius: 3px;
+    padding: .3rem .5rem;
+}
+
+.add-section{
+    button{
+        flex: 2;
+        height: 2rem;
+        padding: 0 .5rem;
+        border: 1px solid #EDEDED;
+        background-color: $tertiary-color;
+        margin: 0 .3rem;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    button:focus{
+        border: 1px solid $secondary-color;
+        box-shadow: 2px 2px 2px $secondary-color;
+    }
+    button:hover{
+        background-color: darken($tertiary-color, 10%);
+    }
+}
+
+.nav__item > a{
+    transition: all .3s ease-in-out;
+}
+.nav__item > a:hover{
+    background-color: darken($tertiary-color, 10%);
+    color: $secondary-color;
+}
+.nav__item > a:focus{
+    background-color: darken($tertiary-color, 10%);
+    border: 1px solid $primary-color !important;
+    box-shadow: 2px 2px 2px $tertiary-color;
+    color: $secondary-color;
+}

@@ -1,0 +1,193 @@
+@import "config";
+@import "container", "buttons";
+
+body{
+    min-height: 100vh;
+}
+header.header{
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $secondary-color;
+
+    .logo{
+        margin-left: 1.5em;
+    }
+
+    ul{
+        display: flex;
+        gap: 1.5em;
+        margin-right: 1.5em;
+
+        li{
+            list-style-type: none;
+
+            &:nth-child(2){
+                a{
+                    @include header-buttons;
+                    border: 1px solid #EDEDED;
+                }
+            }
+            &:nth-child(3){
+                a{
+                    @include header-buttons;
+                    border: 1px solid #EDEDED;
+                    background-color: $tertiary-color;
+                }
+            }
+        }
+
+        a{
+            text-decoration: none;
+            font-weight: 500;
+            color: set-text-color($primary-color)
+        }
+
+    }
+}
+
+section.row-board{
+    display: flex;
+    margin-top: .5rem;
+
+    .categories{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        // background-color: black;
+        padding: 1.5rem 0;
+        position: relative;
+
+        .category-header{
+            color: set-text-color($primary-color);
+            font-size: 1.3rem;
+        }
+
+        ul{
+            display: flex;
+            height: 3rem;
+            gap: .4rem;
+        }
+        li{
+            list-style-type: none;
+            display: flex;
+            align-items: center;
+        }
+        a{
+            // text-decoration: none;
+            color: set-text-color($primary-color);
+        }
+        li:nth-child(3){
+            // text-decoration: none;
+            display: none;
+            font-size: .8rem;
+        }
+    
+    }
+    aside.aside{
+        display: none;
+    }
+}
+.list-check{
+    display: none;
+}
+
+@import "inputs";
+
+h3{
+    color: set-text-color($primary-color);
+    margin: 1.5em;
+}
+
+.todos-gratitudes{
+    display: flex;
+    align-items: center;
+    background-color: $secondary-color;
+    border: 1px solid lighten($color: $primary-color, $amount: 10%);
+    padding: .3rem 1.5rem;
+    border-radius: .3rem;
+
+    .check-image{
+        flex:1;
+        display: flex;
+        align-items: center;
+
+        img{
+            width: 1.4rem;
+        }
+    }
+    
+    .actual-text{
+        flex: 5;
+        color: set-text-color($primary-color);
+    }
+
+    .option-icons{
+        flex: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        color: $tertiary-color;
+
+        span{
+            display: inline-block;
+            cursor: pointer;
+            padding: .5rem;
+            border-radius: 50%;
+            transition: all .3s ease-in-out;
+        }
+        span:hover{
+            background-color: rgba(192, 192, 192, 0.514);
+            color: $secondary-color;
+        }
+    }
+
+}
+.todos-gratitudes:hover{
+    background-color: $primary-color;
+    border: 1px solid lighten($secondary-color,10%);
+    cursor: default;
+}
+
+footer{
+    display: flex;
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.more-link{
+    display: block;
+    margin: .8rem;
+    color: set-text-color($primary-color);
+    text-align: right;
+}
+
+.social-icons{
+    width: 8rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .facebook{
+        color: blue;
+    }
+
+    .twitter{
+        color: #02aee7;
+    }
+
+    .instagram{
+        color: goldenrod;
+    }
+
+    .github{
+        color: black;
+    }
+}
+
+@import "tablet";

@@ -15,8 +15,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  background-color: #E6E6FF;
-  background: #E6E6FF;
+  background-color: #444444;
+  background: #444444;
   font-size: 1rem;
 }
 
@@ -27,24 +27,35 @@ code {
 button:focus,input:focus, a:focus{
   box-shadow: none !important;
 }
+.todo-cliff{
+    display: block;
+    margin: 0rem auto;
+  }
 
-@media screen and (max-width:767) {
-  body{
-    background-color: aqua !important;
+@media (max-width:767px) {
+  .todo-cliff{
+    height: 70%;
+    display: block;
+    margin: 0rem auto;
   }
     
 }
-@media screen and (max-width:991) and (min-width:768) {
-  .collapsing-nav{
-  border: 1px solid black;
-}
+@media (max-width:991px) and (min-width:768px) {
+  /* body{
+    background-color: red !important;
+  } */
     
 }
-@media screen and (max-width:1199) and (min-width:992) {
+@media (max-width:1199px) and (min-width:992px) {
+  .todo-cliff{
+    height: 70%;
+  }
     
 }
-@media screen and (min-width:1200) {
-    
+@media (min-width:1200px) {
+  .todo-cliff{
+    height: 60%;
+  }
 }
 
 /* .header-nav-link{

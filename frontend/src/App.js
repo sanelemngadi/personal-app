@@ -8,6 +8,8 @@ import NavigationBar from './hocs/NavigationBar';
 import Todo from "./components/todos/Todo";
 import Home from "./components/home/Home";
 import { useFetchAPI } from './hooks';
+import NavBar from './hocs/NavBar';
+import Footer from './hocs/Footer';
 
 function App() {
   const loggedInUser = useFetchAPI("users/user/", {});
@@ -30,7 +32,8 @@ function App() {
   const isAuth = isAuthenticated();
   return (
     <Router>
-      <NavigationBar isAuth={isAuth} />
+      {/* <NavigationBar isAuth={isAuth} /> */}
+      <NavBar />
       <Routes>
         <Route exact path="/" element={<Home setUser={setUser} />} />
         {isAuth && <Route path="/todos/" element={<Todo />} />}
@@ -40,6 +43,7 @@ function App() {
         <Route path="/complete-registration/:id/" element={<CompleteRegistration id={user.id} />} />
         {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
+      <Footer />
     </Router>
   );
 }
